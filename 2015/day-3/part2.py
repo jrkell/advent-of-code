@@ -38,19 +38,26 @@ def move(x, y, cmd):
         y -= 1
     return x, y
 
+def isEven(n: int) -> bool:
+    return n % 2 == 0
 
 line = openInput()
 houses = Houses()
 
 # first house
-x, y = 0, 0
-house = houses.getHouse(x,y)
+santa_x, santa_y = 0, 0
+robo_x, robo_y = 0, 0
+house = houses.getHouse(santa_x,santa_y)
 house.addGift()
 
 # the rest
-for cmd in line:
-    x, y = move(x, y, cmd)
-    house = houses.getHouse(x,y)
+for (idx, cmd) in enumerate(line):
+    if (isEven(idx)):
+        santa_x, santa_y = move(santa_x, santa_y, cmd)
+        house = houses.getHouse(santa_x, santa_y)
+    else:
+        robo_x, robo_y = move(robo_x, robo_y, cmd)
+        house = houses.getHouse(robo_x, robo_y)
     house.addGift()
     # print(f'added gift at {x=}, {y=}')
 
