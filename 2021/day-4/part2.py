@@ -14,6 +14,7 @@ class Card():
         self.raw_grid = [line.split() for line in lines] # 5x5 2d array
         self.grid = [['' for j in range(0,5)] for i in range(0,5)]
         self.total = 0
+        self.done = False
         for (y, row) in enumerate(self.raw_grid):
             for (x, value) in enumerate(row):
                 int_value = int(value)
@@ -81,14 +82,24 @@ cards: list[Card] = []
 lines = openInput()
 for row in range(cards_start_at_line,len(lines),card_size+1):
     cards.append(Card(lines[row:row+card_size]))
+total_cards = len(cards)
+done_cards = 0
 
-# draw numbers until a card wins
+# draw numbers and keep marking off cards
 drawn_nums = lines[0].split(',')
 for num in drawn_nums:
     for card in cards:
+        # skip ones that are already winners
+        if card.done:
+            continue
+
+        # otherwise carry on
         card.findMatch(int(num))
         if card.isWinner():
-            # then print the sum
-            print(card.getSumOfUnmatched() * int(num))
-            exit()
+            card.done = True
+            done_cards += 1
 
+            # if we're down to 1 non-winner left, we're done
+            if done_cards == total_cards:
+                print(card.getSumOfUnmatched() * int(num))
+                exit()
