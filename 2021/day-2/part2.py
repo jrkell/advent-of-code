@@ -1,4 +1,3 @@
-#%%
 class Position():
     def __init__(self) -> None:
         self.x = 0
@@ -39,6 +38,3 @@ x = position.x
 y = position.y
 
 print(f'{x=} and {y=} and their product is {x*y}')
-
-
-# %%

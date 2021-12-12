@@ -75,18 +75,13 @@ class SignalPattern():
         self.answer = result[0] * 1000 +result[1] * 100 + result[2] * 10 + result[3]
 
 def xContainsY(x: str, y: str) -> bool:
-    for char in y:
-        if char not in x:
-            return False
-    return True
-
+    return not [char for char in y if char not in x]
+    
 def getMissingChars(haystack: str, needle: str) -> list[str]:
     return [char for char in haystack if char not in needle]
 
-
 def isAnagramOf(x: str, y: str) -> bool:
     return sorted(x) == sorted(y)
-
 
 def openInput():
     location = os.path.realpath(
@@ -96,7 +91,6 @@ def openInput():
 
 lines = openInput()
 
-temp = []
 total = 0
 for line in lines:
     split = line.split(' | ')
