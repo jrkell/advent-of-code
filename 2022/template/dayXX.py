@@ -9,7 +9,7 @@ def openInput() -> list[str]:
 
 
 def main(part: int):
-    pass
+    data = openInput()
 
 if __name__ == '__main__':
     print("Part 1:", main(1))
